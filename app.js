@@ -4,6 +4,7 @@ import path from "path";
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import cors from "cors";
 
 import router from "./api";
 import db from "./db";
@@ -13,7 +14,13 @@ const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
 require("./passport")(passport, db);
 
+let corsOptions = {
+  origin: " https://sea-lion-app-fylpk.ondigitalocean.app",
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
+app.use(cors(corsOptions));
 
 let sessionOptions = {
   secret: process.env.SESSION_SECRET,
