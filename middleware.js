@@ -3,6 +3,7 @@ import path from "path";
 
 export const configuredHelmet = () =>
   helmet({
+    crossOriginResourcePolicy: false,
     contentSecurityPolicy: {
       directives: {
         defaultSrc: [
