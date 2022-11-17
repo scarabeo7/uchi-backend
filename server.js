@@ -1,5 +1,4 @@
 import http from "http";
-
 import app from "./app";
 import { cronJob } from "./notifications";
 import { connectDb, disconnectDb } from "./db";

@@ -47,6 +47,10 @@ app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+})
 
 if (app.get("env") === "production") {
 	app.enable("trust proxy");
