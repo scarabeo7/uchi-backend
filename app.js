@@ -4,6 +4,7 @@ import path from "path";
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import cors from "cors";
 
 import router from "./api";
 import db from "./db";
@@ -13,7 +14,13 @@ const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
 require("./passport")(passport, db);
 
+let corsOptions = {
+  origin: "https://walrus-app-xcsgr.ondigitalocean.app",
+  optionsSuccessStatus: 200,
+};
+
 const app = express();
+app.use(cors(corsOptions));
 
 let sessionOptions = {
   secret: process.env.SESSION_SECRET,
@@ -40,6 +47,10 @@ app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+})
 
 if (app.get("env") === "production") {
 	app.enable("trust proxy");
