@@ -15,7 +15,7 @@ const staticDir = path.join(__dirname, "static");
 require("./passport")(passport, db);
 
 let corsOptions = {
-  origin: "https://walrus-app-xcsgr.ondigitalocean.app",
+  origin: " https://sea-lion-app-fylpk.ondigitalocean.app",
   optionsSuccessStatus: 200,
 };
 
