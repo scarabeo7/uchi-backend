@@ -21,7 +21,7 @@ require("./passport")(passport, db);
 
 const app = express();
 app.use(cors({
-	methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+	origin: '*'
 }));
 
 let sessionOptions = {
@@ -49,10 +49,10 @@ app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://goldfish-app-zpg5e.ondigitalocean.app");
-  next();
-})
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "https://goldfish-app-zpg5e.ondigitalocean.app");
+//   next();
+// })
 
 if (app.get("env") === "production") {
 	app.enable("trust proxy");
