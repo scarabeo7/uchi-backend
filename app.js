@@ -4,7 +4,7 @@ import path from "path";
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-// import cors from "cors";
+import cors from "cors";
 
 import router from "./api";
 import db from "./db";
@@ -20,7 +20,9 @@ require("./passport")(passport, db);
 // };
 
 const app = express();
-// app.use(cors(corsOptions));
+app.use(cors({
+	methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 
 let sessionOptions = {
   secret: process.env.SESSION_SECRET,
