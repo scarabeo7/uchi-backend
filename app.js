@@ -44,19 +44,20 @@ app.use(logErrors());
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(session(sessionOptions));
-// app.use(cors({
-// 	origin: 'https://uchi.world',
-// 	credentials: true,
-// }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://uchi.world');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', '*');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
-})
+});
+// app.use(cors({
+// 	origin: 'https://uchi.world',
+// 	credentials: true,
+// }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 if (app.get("env") === "production") {
 	app.enable("trust proxy");
