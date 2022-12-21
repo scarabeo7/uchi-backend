@@ -4,7 +4,7 @@ import path from "path";
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-// import cors from "cors";
+import cors from "cors";
 
 import router from "./api";
 import db from "./db";
@@ -20,9 +20,6 @@ require("./passport")(passport, db);
 // };
 
 const app = express();
-// app.use(cors({
-// 	origin: 'https://goldfish-app-zpg5e.ondigitalocean.app'
-// }));
 
 let sessionOptions = {
   secret: process.env.SESSION_SECRET,
@@ -47,15 +44,18 @@ app.use(logErrors());
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(session(sessionOptions));
+app.use(cors({
+	origin: 'https://uchi.world'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://uchi.world');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
-})
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://uchi.world');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.setHeader('Access-Control-Allow-Methods', '*');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   next();
+// })
 
 if (app.get("env") === "production") {
 	app.enable("trust proxy");
