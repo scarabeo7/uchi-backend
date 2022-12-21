@@ -44,8 +44,8 @@ export const requestReset = async (req, res) => {
       to: email,
       subject: "Uchi password reset link",
       html: `Someone requested a password reset for this Uchi account. If it wasn't you, no need to do anything. If you required a password reset, 
-				go to <a href="https://dev-ninjas-uchi.herokuapp.com/reset?id=${userDetails.id}&token=${hash}">
-				https://dev-ninjas-uchi.herokuapp.com/reset?id=${userDetails.id}&token=${hash}</a> to reset your password. This link is only valid for today.`,
+				go to <a href="https://uchi.world/reset?id=${userDetails.id}&token=${hash}">
+				https://uchi.world/reset?id=${userDetails.id}&token=${hash}</a> to reset your password. This link is only valid for today.`,
     };
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -122,8 +122,8 @@ export const createNewAdmin = async (req, res) => {
         to: email,
         subject: "Uchi account created",
         html: `Someone created an account for you on Uchi with username ${userDetails.username}. To choose your new password, 
-				go to <a href="https://dev-ninjas-uchi.herokuapp.com/reset?id=${userDetails.id}&type=newaccount&token=${hash}">
-				https://dev-ninjas-uchi.herokuapp.com/reset?id=${userDetails.id}&type=newaccount&token=${hash}</a> to reset your password. This link is only valid for today`,
+				go to <a href="https://uchi.world/reset?id=${userDetails.id}&type=newaccount&token=${hash}">
+				https://uchi.world/reset?id=${userDetails.id}&type=newaccount&token=${hash}</a> to reset your password. This link is only valid for today`,
       };
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
