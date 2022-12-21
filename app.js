@@ -45,7 +45,8 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(cors({
-	origin: 'https://uchi.world'
+	origin: 'https://uchi.world',
+	credentials: true,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
