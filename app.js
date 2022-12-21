@@ -1,14 +1,19 @@
 import express from "express";
 import morgan from "morgan";
 import path from "path";
-import passport from 'passport';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
+import passport from "passport";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 // import cors from "cors";
 
 import router from "./api";
 import db from "./db";
-import { configuredHelmet, httpsOnly, logErrors, pushStateRouting } from "./middleware";
+import {
+  configuredHelmet,
+  httpsOnly,
+  logErrors,
+  pushStateRouting,
+} from "./middleware";
 
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
@@ -45,10 +50,10 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://uchi.world');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader("Access-Control-Allow-Origin", "https://uchi.world");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 // app.use(cors({
@@ -58,10 +63,9 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 if (app.get("env") === "production") {
-	app.enable("trust proxy");
-	app.use(httpsOnly());
+  app.enable("trust proxy");
+  app.use(httpsOnly());
 }
 
 app.use(apiRoot, router);
