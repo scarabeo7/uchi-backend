@@ -50,7 +50,7 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://uchi.world/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://uchi.world');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', '*');
   next();
