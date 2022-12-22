@@ -60,7 +60,7 @@ const createEmailText = async () => {
 			<td>${new Date(item.created_on).toLocaleDateString("en-GB")}</td></tr>`;
   });
   if (artwork.length > 0) {
-    html += `</tbody></table><div>Go to <a href="https://dev-ninjas-uchi.herokuapp.com/login">login</a> to approve new submissions.</div></body></html>`;
+    html += `</tbody></table><div>Go to <a href="https://uchi.world/login">login</a> to approve new submissions.</div></body></html>`;
   }
   return html;
 };
